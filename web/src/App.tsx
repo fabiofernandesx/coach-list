@@ -1,11 +1,11 @@
 import React from 'react';
 import './assets/styles/global.css';
+import Landing from './pages/Landing';
 
 function App() {
   return (
     <div>
-      <h1>The Coach List</h1>
-      <h2>https://coach-list.xyz</h2>
+      <Landing />
     </div>
   );
 }
