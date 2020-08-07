@@ -18,6 +18,10 @@
   border: 0;
   padding: 0 2.4rem;
 }
+#page-coach-form main fieldset .input-block + .textarea-block,
+#page-coach-form main fieldset .select-block + .input-block {
+  margin-top: 2.4rem;
+}
 #page-coach-form main fieldset + fieldset {
   margin-top: 6.4rem;
 }
@@ -32,6 +36,19 @@
   padding-bottom: 1.6rem;
   border-bottom: 1px solid var(--color-line-in-white);
 }
+
+#page-coach-form main fieldset legend button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font: 700 1.6rem Archivo;
+  transition: color 0.2s;
+}
+#page-coach-form main fieldset legend button:hover {
+  color: var(--color-primary-dark);
+}
+
 #page-coach-form main label {
   color: var(--color-text-complement);
 }
@@ -84,6 +101,14 @@
   }
   #page-coach-form main fieldset {
     padding: 0 6.4rem;
+  }
+  #page-coach-form main .schedule-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    column-gap: 1.6rem;
+  }
+  #page-coach-form main .schedule-item .input-block {
+    margin-top: 0 !important;
   }
   #page-coach-form main footer {
     padding: 4rem 6.4rem;

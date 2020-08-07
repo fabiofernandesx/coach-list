@@ -27,7 +27,8 @@
     position: absolute;
     bottom: -28px;
   }
-  #search-coaches .input-block + .input-block {
+  #search-coaches .input-block + .input-block,
+  #search-coaches .select-block + .select-block {
     margin-top: 0;
   }
   #page-coach-list main {
