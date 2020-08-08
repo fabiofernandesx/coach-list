@@ -49,7 +49,7 @@
   display: block;
 }
 
-.coach-item footer button {
+.coach-item footer a {
   width: 20rem;
   height: 5.6rem;
   background: var(--color-secondary);
@@ -62,11 +62,12 @@
   align-items: center;
   justify-content: center;
   transition: 0.2s;
+  text-decoration: none;
 }
-.coach-item footer button img {
+.coach-item footer a img {
   margin-right: 1.6rem;
 }
-.coach-item footer button:hover {
+.coach-item footer a:hover {
   background: var(--color-secondary-dark);
 }
 @media (min-width: 700px) {

@@ -2,31 +2,37 @@ import React from 'react';
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 
 import './styles.css';
+import { coach } from '../../interfaces/coach';
+import api from '../../services/api';
 
-const CoachItem = () => {
+interface coachProps {
+  coach: coach;
+}
+
+const CoachItem: React.FC<coachProps> = ({ coach }) => {
+  const createNewConnection = () => {
+    api.post('connections', {
+      user_id: coach.id,
+    });
+  };
   return (
     <article className="coach-item">
       <header>
-        <img src="https://i.pravatar.cc/150?img=13" alt="avatar" />
+        <img src={coach.avatar} alt="avatar" />
         <div>
-          <strong>John Doe</strong>
-          <span>Lifecoach</span>
+          <strong>{coach.name}</strong>
+          <span>{coach.area}</span>
         </div>
       </header>
-      <p>
-        Adipisci quae distinctio eius asperiores adipisci aut. Vel provident labore minus repudiandae totam maiores.
-        <br />
-        Minus iusto eaque deleniti natus corporis. Voluptas nobis occaecati vero eaque ut veniam est. Earum placeat sunt
-        architecto dolores sed autem. Quia repellendus cupiditate."
-      </p>
+      <p>{coach.bio}</p>
       <footer>
         <p>
-          Session Price <strong>US$60.00</strong>
+          Session Price <strong>US$ {coach.price}</strong>
         </p>
-        <button type="button">
+        <a onClick={createNewConnection} href={`https://wa.me/${coach.phone}`} type="button">
           <img src={whatsappIcon} alt="contact" />
           Contact
-        </button>
+        </a>
       </footer>
     </article>
   );
