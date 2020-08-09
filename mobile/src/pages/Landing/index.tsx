@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
+import { View, Image, Text } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { RectButton } from 'react-native-gesture-handler'
 
 import styles from './styles'
 
@@ -9,6 +11,14 @@ import giveClasses from '../../../assets/icons/give-classes.png'
 import heartIcon from '../../../assets/icons/heart.png'
 
 const Landing = () => {
+  const { navigate } = useNavigation();
+
+  function handleNavigateToCoachRegisterPage() {
+    navigate("CoachRegister")
+  }
+  function handleNavigateToCoachesPages() {
+    navigate('Coaches')
+  }
   return (
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
@@ -17,14 +27,14 @@ const Landing = () => {
         <Text style={styles.titleBold}> Select your option</Text>
       </Text>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={[styles.button, styles.buttonPrimary]}>
+        <RectButton style={[styles.button, styles.buttonPrimary]} onPress={handleNavigateToCoachesPages}>
           <Image source={studyIcon} />
           <Text>Find a Coach</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.buttonSecondary]}>
+        </RectButton>
+        <RectButton style={[styles.button, styles.buttonSecondary]} onPress={handleNavigateToCoachRegisterPage}>
           <Image source={giveClasses} />
           <Text>I'm a Coach</Text>
-        </TouchableOpacity>
+        </RectButton>
       </View>
       <Text style={styles.totalConnections}>
         285 connections already made {'  '}
