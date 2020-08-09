@@ -2,7 +2,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import CoachList from '../pages/CoachList';
-import Favorites from '../pages/Favorites/intex';
+import Favorites from '../pages/Favorites';
 
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -38,18 +38,18 @@ const CoachTabs = () => {
       <Screen name="CoachList" component={CoachList}
         options={{
           tabBarLabel: 'Sessions',
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ color, size, focused }) => {
             return (
-              <Ionicons name="ios-easel" size={size} color={color} />
+              <Ionicons name="ios-easel" size={size} color={focused ? '#8257e5' : color} />
             );
           }
         }} />
       <Screen name="Favorites" component={Favorites}
         options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ color, size, focused }) => {
             return (
-              <Ionicons name="ios-heart" size={size} color={color} />
+              <Ionicons name="ios-heart" size={size} color={focused ? '#8257e5' : color} />
             );
           }
         }}
