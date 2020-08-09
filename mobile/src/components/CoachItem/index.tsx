@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Image, Text, Linking } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
+
 import styles from './styles'
 import { RectButton } from 'react-native-gesture-handler'
 
@@ -10,12 +12,30 @@ import { coach } from '../../interfaces/coach'
 
 interface coachProps {
   coach: coach;
+  favorite: boolean;
 }
 
-const CoachItem: React.FC<coachProps> = ({ coach }) => {
+const CoachItem: React.FC<coachProps> = ({ coach, favorite }) => {
+  const [isFavorite, setAsFavorite] = useState(favorite)
   function handleLinkToWhatsapp() {
     Linking.openURL(`whatsapp://send?phone=${coach.phone}`)
   }
+  async function toggleFavorite() {
+    const favorites = await AsyncStorage.getItem('favorites');
+    let favoritesArray = [];
+    if (favorites) {
+      favoritesArray = JSON.parse(favorites);
+    }
+    if (isFavorite) {
+      const favoriteIndex = favoritesArray.findIndex((coachItem: coach) => { return coachItem.id === coach.id });
+      favoritesArray.splice(favoriteIndex, 1);
+    } else {
+      favoritesArray.push(coach);
+    }
+    await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
+    setAsFavorite(!isFavorite)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -31,9 +51,8 @@ const CoachItem: React.FC<coachProps> = ({ coach }) => {
           Price per session{'   '} <Text style={styles.priceValue}>USD$ {coach.price}</Text>
         </Text>
         <View style={styles.buttonsContainer}>
-          <RectButton style={[styles.favoriteButton, styles.favorite]}>
-            {/* <Image source={outlineHeartIcon} /> */}
-            <Image source={filledHeartIcon} />
+          <RectButton style={[styles.favoriteButton, isFavorite ? styles.favorite : {}]} onPress={toggleFavorite}>
+            {isFavorite ? <Image source={filledHeartIcon} /> : <Image source={outlineHeartIcon} />}
           </RectButton>
           <RectButton style={styles.contactButton} onPress={handleLinkToWhatsapp}>
             <Image source={phoneIcon} />
